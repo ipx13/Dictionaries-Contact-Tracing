@@ -18,6 +18,12 @@ while True:
             if choice_mainmenu == 1:
                 print("gottem")
                 break
+            elif choice_mainmenu == 2:
+                print("this is 2")
+            elif choice_mainmenu == 3:
+                print("this is 3")
+            elif choice_mainmenu == 4:
+                print("this is 4")
         else:
             print("Please choose among the choices. Enter an integer between 1-4.")
             continue
