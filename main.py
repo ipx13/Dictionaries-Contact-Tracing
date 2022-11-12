@@ -1,3 +1,10 @@
+'''
+Created by Irish Paniza of BSC0E 2-2
+Submitted to Engr. Danilo Madrigalejos for CMPE 30052
+Date Submitted: 11/13/22
+Description: This is a contact tracing program that utilizes dictionaries to store and manage data. The program asks for user's information that could be used to track them, which will then be added to the database. The user can also search for other people's information, given that they know their full name.
+'''
+
 def menu():
     print("\n===== Menu =====\n"
           "1 -> Add a profile\n"
@@ -19,7 +26,8 @@ while True:
         if choice_mainmenu in [1, 2, 3]:
             if choice_mainmenu == 1:
                 print("\n===== Adding a profile =====\n\n"
-                      "Please enter your full name (e.g.: Juan Delacruz).")
+                      "NOTE: This program could not contain duplicate names. Make sure that your full \nname is unique, or your information might get overwritten.")
+                print("\nPlease enter your full name (e.g.: Juan Delacruz).")
                 name = input("Full name: ")
 
                 print("\nPlease enter your age.")
@@ -54,7 +62,16 @@ while True:
                     if vaccination in ["Y", "N"]:
                         break
                     else:
-                        print("Please enter only either Y or N.")
+                        print("Please enter only either Y or N.\n")
+                        continue
+
+                print("\nPlease enter your recent medical history.")
+                while True:
+                    history = input("Did you experience any symptoms like flu, colds, or fever in the last 14 days? (Y or N): ")
+                    if history in ["Y", "N"]:
+                        break
+                    else:
+                        print("Please enter only either Y or N.\n")
                         continue
 
                 temp_dict = {"{}".format(name): {
@@ -62,10 +79,12 @@ while True:
                                 "age": age,
                                 "address": address,
                                 "number": number,
-                                "vaccination": vaccination
+                                "vaccination": vaccination,
+                                "history": history
                 }}
 
                 main_dict.update(temp_dict)
+                print("\nSuccessfully added", name + "'s", "contact info to the database!")
 
             elif choice_mainmenu == 2:
                 print("\n===== Search in Dictionary =====")
@@ -76,11 +95,15 @@ while True:
                         print("Name:", main_dict[i]["name"])
                         print("Age:", main_dict[i]["age"])
                         print("Address:", main_dict[i]["address"])
-                        print("Phone Number:", main_dict[i]["number"])
-                        print("Vaccination Status:", main_dict[i]["number"])
+                        print("Phone number:", main_dict[i]["number"])
+                        print("Full vaccination status:", main_dict[i]["vaccination"])
+                        print("Recently experienced flu-like symptoms:", main_dict[i]["history"])
+                    else:
+                        print("\nNo match found!")
 
             elif choice_mainmenu == 3:
-                print("Thank you for using this program!")
+                print("\nLoading...")
+                print("\nThank you for using this program!")
                 break
             continue
         else:
