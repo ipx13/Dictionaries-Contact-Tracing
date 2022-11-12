@@ -10,13 +10,25 @@ print("\n===== Contact Tracing Program =====\n"
 
 while True:
     try:
-        choice_mainmenu = int(input("What would you like to do?"))
+        choice_mainmenu = int(input("\nWhat would you like to do? "))
     except:
         print("Please enter only an integer! Choose between choices 1-4.")
     else:
         if choice_mainmenu in [1, 2, 3, 4]:
             if choice_mainmenu == 1:
-                print("gottem")
+                print("\n===== Adding a profile =====\n"
+                      "Please enter your full name (Format: Firstname Surname; e.g.: Juan Delacruz)")
+                name = input("Full name: ")
+                print("\nPlease enter your age")
+                while True:
+                    try:
+                        age = int(input("Age: "))
+                    except:
+                        print("Please enter an integer for your age.")
+                        continue
+                    else:
+                        break
+
                 break
             elif choice_mainmenu == 2:
                 print("this is 2")
