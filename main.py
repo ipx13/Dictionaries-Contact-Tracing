@@ -2,11 +2,9 @@ def menu():
     print("\n===== Menu =====\n"
           "1 -> Add a profile\n"
           "2 -> Search for a profile\n"
-          "3 -> Check database summary and statistics\n"
-          "4 -> Exit")
+          "3 -> Exit")
 
-main_dict = {"name": "name", "info": "info"}
-print(main_dict)
+main_dict = {}
 
 print("\n===== Contact Tracing Program =====\n"
           "Welcome to my contact tracing program!")
@@ -16,13 +14,14 @@ while True:
     try:
         choice_mainmenu = int(input("\nWhat would you like to do? "))
     except:
-        print("Please enter only an integer! Choose between choices 1-4.")
+        print("Please enter only an integer! Choose between choices 1-3.")
     else:
-        if choice_mainmenu in [1, 2, 3, 4]:
+        if choice_mainmenu in [1, 2, 3]:
             if choice_mainmenu == 1:
                 print("\n===== Adding a profile =====\n\n"
                       "Please enter your full name (e.g.: Juan Delacruz).")
                 name = input("Full name: ")
+
                 print("\nPlease enter your age.")
                 while True:
                     try:
@@ -37,6 +36,7 @@ while True:
                             print("\nOh, so you're saying that you're just", age, "year/s old? Can you even read or write just yet?\n")
                             continue
                         break
+
                 print("\nPlease enter your address.")
                 address = input("Address: ")
                 print("\nPlease enter your phone number.")
@@ -47,40 +47,43 @@ while True:
                         print("Please enter only integers for your phone number.\n")
                     else:
                         break
-                temp_dict = {
-                    "name_{}".format(name): name,
-                    "info_{}".format(name): {
-                        "age": age,
-                        "address": address,
-                        "number": number
-                    }
-                }
-                print(temp_dict)
+
+                print("\nPlease enter your vaccination status.")
+                while True:
+                    vaccination = input("Are you fully vaccinated? (Y or N): ")
+                    if vaccination in ["Y", "N"]:
+                        break
+                    else:
+                        print("Please enter only either Y or N.")
+                        continue
+
+                temp_dict = {"{}".format(name): {
+                                "name" : name,
+                                "age": age,
+                                "address": address,
+                                "number": number,
+                                "vaccination": vaccination
+                }}
+
                 main_dict.update(temp_dict)
-                print("main dict:", main_dict)
 
             elif choice_mainmenu == 2:
+                print("\n===== Search in Dictionary =====")
                 name_search = input("Full name: ")
-
-                matches_dict = {}
-                counter = 0
                 for i in main_dict:
-                    if name_search == main_dict[i]:
-                        matches_dict.update(i)
-                        counter += 1
-                if counter == 0:
-                    print("no match found")
-
-                '''for j in matches_dict:
-                    for k in main_dict:
-                        if k'''
+                    if name_search == i:
+                        print("\nMatch found!\n")
+                        print("Name:", main_dict[i]["name"])
+                        print("Age:", main_dict[i]["age"])
+                        print("Address:", main_dict[i]["address"])
+                        print("Phone Number:", main_dict[i]["number"])
+                        print("Vaccination Status:", main_dict[i]["number"])
 
             elif choice_mainmenu == 3:
-                print("this is 3")
-            elif choice_mainmenu == 4:
-                print("this is 4")
+                print("Thank you for using this program!")
+                break
             continue
         else:
-            print("Please choose among the choices. Enter an integer between 1-4.")
+            print("Please choose among the choices. Enter an integer between 1-3.")
             continue
     break
